@@ -29,7 +29,7 @@
 
       <div class="collapse navbar-collapse" id="navbarsPet-Smart">
         <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'index' %}">Inicio</a>
           </li>
           <li><a class="nav-link" href="{% url 'shop' %}">Tienda</a></li>
@@ -39,7 +39,7 @@
         </ul>
 
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-          <li><a class="nav-link" href="#">Iniciar Sesión</a></li>
+          <li><a class="nav-link" href="{% url 'loginn' %}">Iniciar Sesión</a></li>
           <li><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'app/images/cart.svg' %}"></a></li>
         </ul>
       </div>

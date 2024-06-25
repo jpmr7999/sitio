@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import Producto, Orden, Cliente
-
+from .models import Producto, Orden, Cliente, OrdenItem
+from .forms import ProductoForm
+from django.shortcuts import get_object_or_404, redirect
 def about(request):
     return render(request, 'app/about.html')
 
@@ -8,7 +9,11 @@ def base(request):
     return render(request, 'app/base.html')
 
 def cart(request):
-    return render(request, 'app/cart.html')
+    ordenitem = OrdenItem.objects.all()
+    datos = {
+        'ordenitem':ordenitem
+    }
+    return render(request, 'app/cart.html', datos)
 
 def checkout(request):
     return render(request, 'app/checkout.html')
@@ -34,7 +39,7 @@ def thankyou(request):
 def dash(request):
     return render(request, 'dash/index.html')
 
-def login(request):
+def loginn(request):
     return render(request, 'dash/login.html')
 
 def register(request):
@@ -69,7 +74,18 @@ def tabla_producto(request):
     return render(request, 'dash/tabla_producto.html', datos)
 
 def agregar_producto(request):
-    return render(request, 'dash/agregar_producto.html')
+    form=ProductoForm()
+
+    if request.method=="POST":
+        form=ProductoForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(to="tabla_producto")
+
+    datos={
+        "form":form
+    }
+    return render(request, 'dash/agregar_producto.html',datos)
 
 def modificar_producto(request):
     return render(request, 'dash/modificar_producto.html')

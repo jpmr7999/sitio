@@ -70,7 +70,9 @@ TEMPLATES = [
         },
     },
 ]
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 WSGI_APPLICATION = 'sitio.wsgi.application'
 
 
@@ -129,4 +131,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #RUTA DE ARCHIVOS SUBIDOS
 MEDIA_URL='media/'
 
-MEDIA_ROOT=os.path.join(BASE_DIR,'appcrud/media')
+MEDIA_ROOT=os.path.join(BASE_DIR,'app/media')

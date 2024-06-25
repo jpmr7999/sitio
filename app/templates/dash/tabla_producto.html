@@ -13,7 +13,7 @@
         Lista de productos
       </div>
       <div class="card-body">
-        <a href="agregar_producto.html" class="btn btn-primary">
+        <a href="{% url "agregar_producto" %}" class="btn btn-primary">
           Agregar Producto</a
         >
         <hr />
@@ -43,7 +43,7 @@
           <tbody>
             {% for p in productos %}
             <tr>  <!--   'nombre', 'precio', 'stock', 'categoria'-->
-                <td>ABC123</td>
+                <td>{{p.id}}</td>
                 <td>{{p.nombre}}</td>
                 <td>{{p.categoria}}</td>
                 <td>{{p.precio}}</td>
