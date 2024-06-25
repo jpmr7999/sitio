@@ -1,0 +1,85 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block contenido %}
+  <!-- Start Hero Section -->
+  <div class="hero">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-lg-5">
+          <div class="intro-excerpt">
+            <h1>Acerca de nosotros</h1>
+            <p class="mb-4">Nos encargamos de mantenerte al tanto de todo acto que tu mascota hace cuado tu no te encuentras en casa.</p>
+            <p><a href="{% url 'shop' %}" class="btn btn-secondary me-2">Comprar Ahora</a><a href="{% url 'shop' %}" class="btn btn-white-outline">Explorar</a></p>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="hero-img-wrap">
+            <img src="{% static 'app/images/banner.png' %}" style="width:100%;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Hero Section -->
+
+  <!-- Start Why Choose Us Section -->
+  <div class="why-choose-section">
+    <div class="container">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-lg-6">
+          <h2 class="section-title">¿Por qué escogernos?</h2>
+          <p>La respuesta es sencilla, somos la única empresa que se dedica a que sepas la ubicación y bienestar de tu mascota, sin importar la distancia a la que estés de ella. Siempre tendrás a tu alcance su estado de salud.</p>
+          <div class="row my-5">
+            <div class="col-6 col-md-6">
+              <div class="feature">
+                <div class="icon">
+                  <img src="{% static 'app/images/truck.svg' %}" alt="Image" class="imf-fluid">
+                </div>
+                <h3>Envío Rápido &amp; Gratis</h3>
+                <p>Otras empresas se demoran en enviar los productos y cobran más de lo que uno esperaría. Nosotros nos comprometemos a llegar en 7 días a tu casa por un módico precio de $0.</p>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-6">
+              <div class="feature">
+                <div class="icon">
+                  <img src="{% static 'app/images/bag.svg' %}" alt="Image" class="imf-fluid">
+                </div>
+                <h3>Facilidad al comprar</h3>
+                <p>Nos haremos cargo de que tu experiencia en nuestras tiendas y página web sea lo más agradable posible.</p>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-6">
+              <div class="feature">
+                <div class="icon">
+                  <img src="{% static 'app/images/support.svg' %}" alt="Image" class="imf-fluid">
+                </div>
+                <h3>Atención al Cliente 24/7</h3>
+                <p>Siempre que tengas algún problema, puedes contar con nuestros operadores disponibles las 24 horas para brindarte apoyo.</p>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-6">
+              <div class="feature">
+                <div class="icon">
+                  <img src="{% static 'app/images/return.svg' %}" alt="Image" class="imf-fluid">
+                </div>
+                <h3>Devoluciones Eficientes</h3>
+                <p>Si el producto no es de tu agrado o viene con alguna falla, siempre puedes acudir a una de nuestras tiendas físicas cerca de tu ciudad para hacer la devolución.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="img-wrap">
+            <img src="{% static 'app/images/Escoger.png' %}" alt="Image" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Why Choose Us Section -->
+{% endblock contenido%}

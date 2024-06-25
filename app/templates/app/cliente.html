@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imprimir Boleta</title>
+<style>
+/* Estilo para la boleta */
+.boleta {
+    width: 200px;
+    padding: 20px;
+    border: 2px solid #000;
+    margin: 0 auto;
+}
+
+/* Estilo para ocultar el botón de impresión en la versión impresa */
+@media print {
+    .imprimir-btn {
+        display: none;
+    }
+}
+</style>
+</head>
+<body>
+
+<div id="boleta" class="boleta">
+    <h1>Boleta</h1>
+    <p>Contenido de la boleta...</p>
+</div>
+
+<button class="imprimir-btn" onclick="imprimirBoleta()">Imprimir Boleta</button>
+
+<script>
+function imprimirBoleta() {
+    window.print();
+}
+</script>
+
+</body>
+</html>

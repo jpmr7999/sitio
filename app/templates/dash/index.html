@@ -1,0 +1,132 @@
+{% extends "dash/base.html" %}
+{% block contents %}
+
+
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-chart-area me-1"></i>
+            Historico de ordenes
+          </div>
+          <div class="card-body">
+            <canvas id="myAreaChart" width="100%" height="40"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-chart-bar me-1"></i>
+            Historico recaudacion
+          </div>
+          <div class="card-body">
+            <canvas id="myBarChart" width="100%" height="40"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Ultimas ordenes
+      </div>
+      <div class="card-body">
+        <table id="datatablesSimple">
+          <thead>
+            <tr>
+              <th>Orden</th>
+              <th>Fecha de Pedido</th>
+              <th>Cliente</th>
+              <th>Total</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Orden</th>
+              <th>Fecha de Pedido</th>
+              <th>Cliente</th>
+              <th>Total</th>
+              <th>Estado</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>2024-04-15</td>
+              <td>12345678A</td>
+              <td>$100.00</td>
+              <td>Pendiente</td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>2024-04-16</td>
+              <td>98765432B</td>
+              <td>$120.00</td>
+              <td>Enviado</td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>2024-04-17</td>
+              <td>55555555X</td>
+              <td>$80.00</td>
+              <td>Pendiente</td>
+            </tr>
+            <tr>
+              <td>004</td>
+              <td>2024-04-18</td>
+              <td>99999999Y</td>
+              <td>$150.00</td>
+              <td>Enviado</td>
+            </tr>
+            <tr>
+              <td>005</td>
+              <td>2024-04-19</td>
+              <td>11111111Z</td>
+              <td>$200.00</td>
+              <td>Pendiente</td>
+            </tr>
+            <tr>
+              <td>006</td>
+              <td>2024-04-20</td>
+              <td>33333333W</td>
+              <td>$90.00</td>
+              <td>Enviado</td>
+            </tr>
+            <!-- Agrega más filas según sea necesario -->
+            <tr>
+              <td>038</td>
+              <td>2024-05-10</td>
+              <td>77777777Q</td>
+              <td>$110.00</td>
+              <td>Pendiente</td>
+            </tr>
+            <tr>
+              <td>039</td>
+              <td>2024-05-11</td>
+              <td>88888888R</td>
+              <td>$85.00</td>
+              <td>Enviado</td>
+            </tr>
+            <tr>
+              <td>040</td>
+              <td>2024-05-12</td>
+              <td>44444444S</td>
+              <td>$95.00</td>
+              <td>Pendiente</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock contents %}

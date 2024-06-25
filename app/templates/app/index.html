@@ -1,0 +1,209 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block contenido %}
+
+<!-- Start Hero Section -->
+<div class="hero">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-lg-5">
+        <div class="intro-excerpt">
+          <h1>
+            Porque nos preocupamos de tus mascotas <span clsas="d-block"></span>
+          </h1>
+          <p class="mb-4">
+            Descuentos todos los meses para que tengas acceso facil.Porque
+            siempre nos preocupamos de tu mascota
+          </p>
+          <p>
+            <a href="{% static 'app/shop.html' %}" class="btn btn-secondary me-2">Comprar ahora</a>
+            <a href="{% static 'app/shop.html' %}" class="btn btn-white-outline">Explorar</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="hero-img-wrap">
+          <img src="{% static 'app/images/banner.png' %}" style="width: 100%" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Hero Section -->
+
+<!-- Start Product Section -->
+<div class="product-section">
+  <div class="container">
+    <div class="row">
+      <!-- Start Column 1 -->
+      <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+        <h2 class="mb-4 section-title">Siempre pendiente a tus mascotas.</h2>
+        <p class="mb-4">Sin verlos se pueden cuidar de igual forma</p>
+        <p><a href="{% static 'app/shop.html' %}" class="btn">Explorar</a></p>
+      </div>
+      <!-- End Column 1 -->
+
+      <!-- Start Column 2 -->
+      <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+        <a class="product-item" href="{% static 'app/cart.html' %}">
+          <img src="{% static 'app/images/product-1.png' %}" class="img-fluid product-thumbnail" />
+          <h3 class="product-title">Modelo CI3</h3>
+          <strong class="product-price">$150.000</strong>
+          <span class="icon-cross">
+            <img src="{% static 'app/images/cross.svg' %}" class="img-fluid" />
+          </span>
+        </a>
+      </div>
+      <!-- End Column 2 -->
+
+      <!-- Start Column 3 -->
+      <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+        <a class="product-item" href="{% static 'app/cart.html' %}">
+          <img src="{% static 'app/images/product-2.png' %}" class="img-fluid product-thumbnail" />
+          <h3 class="product-title">Modelo CI4</h3>
+          <strong class="product-price">$230.000</strong>
+          <span class="icon-cross">
+            <img src="{% static 'app/images/cross.svg' %}" class="img-fluid" />
+          </span>
+        </a>
+      </div>
+      <!-- End Column 3 -->
+
+      <!-- Start Column 4 -->
+      <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+        <a class="product-item" href="{% static 'app/cart.html' %}">
+          <img src="{% static 'app/images/product-3.png' %}" class="img-fluid product-thumbnail" />
+          <h3 class="product-title">Modelo CI4-ELITE</h3>
+          <strong class="product-price">$200.000 </strong>
+          <span class="icon-cross">
+            <img src="{% static 'app/images/cross.svg' %}" class="img-fluid" />
+          </span>
+        </a>
+      </div>
+      <!-- End Column 4 -->
+    </div>
+  </div>
+</div>
+<!-- End Product Section -->
+
+<!-- Start Why Choose Us Section -->
+<div class="why-choose-section">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-lg-6">
+        <h2 class="section-title">¿Porque confiar en nosotros?</h2>
+        <p>
+          La respuesta es simple, nosotros nos especializamos en cuidar a tu
+          mascota independientemente de la distancia a la que te encuentres de
+          ella.
+        </p>
+        <div class="row my-5">
+          <div class="col-6 col-md-6">
+            <div class="feature">
+              <div class="icon">
+                <img src="{% static 'app/images/truck.svg' %}" alt="Image" class="img-fluid" />
+              </div>
+              <h3>Envio Rapido &amp; Gratis</h3>
+              <p>
+                Nos preocupamos de que tu pedido llegue en menos de una semana y
+                de forma gratuita.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-6">
+            <div class="feature">
+              <div class="icon">
+                <img src="{% static 'app/images/bag.svg' %}" alt="Image" class="img-fluid" />
+              </div>
+              <h3>Facil para comprar</h3>
+              <p>
+                Hacemos de que tu experiencia comprandonos a nostros sea lo más
+                satisfactoria posible.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-6">
+            <div class="feature">
+              <div class="icon">
+                <img src="{% static 'app/images/support.svg' %}" alt="Image" class="img-fluid" />
+              </div>
+              <h3>Ayuda 24/7</h3>
+              <p>
+                ¿Tienes algun problema? no te preocupes, hay un ejecutivos 24/7
+                esperando a¿tu llamada para que te puedan ayudar.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-6">
+            <div class="feature">
+              <div class="icon">
+                <img src="{% static 'app/images/return.svg' %}" alt="Image" class="img-fluid" />
+              </div>
+              <h3>Devoluciones rapidas y sencillas</h3>
+              <p>
+                Siempre que necesites una devolucion ve a una de nuestras
+                tiendas cerca de tu zona y te podrán hacer una devolucion.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="img-wrap">
+          <img src="{% static 'app/images/Escoger.png' %}" style="width: 100%" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Why Choose Us Section -->
+
+<!-- Start Popular Product -->
+<div class="popular-product">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="product-item-sm d-flex">
+          <div class="thumbnail">
+            <img src="{% static 'app/images/product-1.png' %}" alt="Image" class="img-fluid" />
+          </div>
+          <div class="pt-3">
+            <h3>CI5</h3>
+            <p>Nuevo modelo disponible en tienda</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="product-item-sm d-flex">
+          <div class="thumbnail">
+            <img src="{% static 'app/images/product-2.png' %}" alt="Image" class="img-fluid" />
+          </div>
+          <div class="pt-3">
+            <h3>CI4-ELITE</h3>
+            <p>Nuevo modelo CI4 ahora más económico</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="product-item-sm d-flex">
+          <div class="thumbnail">
+            <img src="{% static 'app/images/product-3.png' %}" alt="Image" class="img-fluid" />
+          </div>
+          <div class="pt-3">
+            <h3>CI4-PRO</h3>
+            <p>CI4-PRO con mejor rastreo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Popular Product -->
+{% endblock contenido %}

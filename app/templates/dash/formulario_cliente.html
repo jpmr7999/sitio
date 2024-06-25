@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Cliente</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <form id="customerForm">
+            <h2>Información básica del cliente</h2>
+            <div class="form-group">
+                <label for="nombreCompleto">Nombre completo:</label>
+                <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Número de teléfono:</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono">
+            </div>
+
+            <div class="form-group">
+                <label for="direccionEnvio">Dirección de envío:</label>
+                <input type="text" class="form-control" id="direccionEnvio" name="direccionEnvio" required>
+            </div>
+
+            <h2>Información de facturación</h2>
+            <div class="form-group">
+                <label for="direccionFacturacion">Dirección de facturación:</label>
+                <input type="text" class="form-control" id="direccionFacturacion" name="direccionFacturacion">
+            </div>
+
+            <div class="form-group">
+                <label for="detallesPago">Detalles de pago:</label>
+                <textarea class="form-control" id="detallesPago" name="detallesPago" rows="4"></textarea>
+            </div>
+
+            <h2>Historial de compras</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fecha de Compra</th>
+                            <th>Productos Comprados</th>
+                            <th>Precio Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historialComprasTable">
+                        <!-- Aquí se mostrarán las filas de la tabla con el historial de compras -->
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Datos de cuenta (si se requiere registro)</h2>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="usarCredenciales">
+                <label class="form-check-label" for="usarCredenciales">Usar nombre de usuario y contraseña</label>
+            </div>
+
+            <div class="form-group" id="divNombreUsuario" style="display: none;">
+                <label for="nombreUsuario">Nombre de usuario:</label>
+                <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario">
+            </div>
+
+            <div class="form-group" id="divContrasena" style="display: none;">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" class="form-control" id="contrasena" name="contrasena">
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="openConfirmationModal()">Agregar Cliente</button>
+            <a href="otra-pagina.html" class="btn btn-secondary">Cancelar</a>
+        </form>
+
+        <!-- Modal de confirmación -->
+        <div class="modal" tabindex="-1" role="dialog" id="confirmationModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmar acción</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estás seguro de que deseas agregar este cliente?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="addCustomer()">Confirmar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de Bootstrap y jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#usarCredenciales').change(function() {
+                if(this.checked) {
+                    $('#divNombreUsuario').show();
+                    $('#divContrasena').show();
+                } else {
+                    $('#divNombreUsuario').hide();
+                    $('#divContrasena').hide();
+                }
+            });
+        });
+
+        function openConfirmationModal() {
+            $('#confirmationModal').modal('show');
+        }
+
+        function addCustomer() {
+            // Aquí puedes agregar la lógica para guardar los datos del cliente en la base de datos o realizar cualquier otra acción necesaria
+            alert("¡Cliente agregado correctamente!");
+            $('#confirmationModal').modal('hide');
+            document.getElementById("customerForm").reset(); // Limpiar el formulario después de agregar el cliente
+        }
+    </script>
+</body>
+</html>

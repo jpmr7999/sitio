@@ -1,0 +1,119 @@
+{% extends "dash/base.html" %}
+{% load static %}
+{% block contents %}
+
+
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Clientes</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Clientes</li>
+                        </ol>
+                        
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Lista de Clientes
+                            </div>
+                            <div class="card-body">
+                                
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Rut</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Email</th>
+                                            <th>Tipo</th>
+                                            <th>Ordenes pendientes</th>
+                                            <th>Gestion</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Rut</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Email</th>
+                                            <th>Tipo</th>
+                                            <th>Ordenes pendientes</th>
+                                            <th>Gestion</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <td>99999999A</td>
+                                            <td>Juan</td>
+                                            <td>Peres</td>
+                                            <td>juan@gm.cl</td>
+                                            <td>Registrado</td>
+                                            <td>0</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
+                                            </td>
+                                          </tr>
+                                          <td>99999999A</td>
+                                            <td>Juan</td>
+                                            <td>Peres</td>
+                                            <td>juan@gm.cl</td>
+                                            <td>Registrado</td>
+                                            <td>0</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
+                                            </td>
+                                          </tr>
+                                          <td>99999999A</td>
+                                            <td>Juan</td>
+                                            <td>Peres</td>
+                                            <td>juan@gm.cl</td>
+                                            <td>Registrado</td>
+                                            <td>0</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
+                                            </td>
+                                          </tr>
+                                          <td>99999999A</td>
+                                            <td>Juan</td>
+                                            <td>Peres</td>
+                                            <td>juan@gm.cl</td>
+                                            <td>Registrado</td>
+                                            <td>0</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
+                                            </td>
+                                          </tr>
+                                          <td>99999999A</td>
+                                            <td>Juan</td>
+                                            <td>Peres</td>
+                                            <td>juan@gm.cl</td>
+                                            <td>Registrado</td>
+                                            <td>0</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
+                                            </td>
+                                          </tr>
+                                          <td>99999999A</td>
+                                            <td>Juan</td>
+                                            <td>Peres</td>
+                                            <td>juan@gm.cl</td>
+                                            <td>Registrado</td>
+                                            <td>0</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
+                                            </td>
+                                          </tr>
+                                          
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                {% endblock contents %}

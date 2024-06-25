@@ -1,0 +1,129 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="{% static 'app/favicon.png' %}">
+  <meta name="description" content="Pet-Smart - Tu tienda única para todas las necesidades de mascotas" />
+  <meta name="keywords" content="mascotas, tienda de mascotas, suministros para mascotas, cuidado de mascotas" />
+
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'app/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static 'app/css/tiny-slider.css' %}" rel="stylesheet">
+  <link href="{% static 'app/css/style.css' %}" rel="stylesheet">
+  <title>Pet-Smart</title>
+</head>
+
+<body>
+
+  <!-- Start Header/Navigation -->
+  <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Barra de navegación de Pet-Smart">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">Pet-Smart<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsPet-Smart" aria-controls="navbarsPet-Smart" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsPet-Smart">
+        <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li><a class="nav-link" href="{% url 'shop' %}">Tienda</a></li>
+          <li><a class="nav-link" href="{% url 'about' %}">¿Quiénes somos?</a></li>
+          <li><a class="nav-link" href="{% url 'dash' %}">Admin</a></li>
+          <li><a class="nav-link" href="{% url 'contact' %}">Contáctanos</a></li>
+        </ul>
+
+        <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+          <li><a class="nav-link" href="#">Iniciar Sesión</a></li>
+          <li><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'app/images/cart.svg' %}"></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  {% block contenido %}
+
+  {% endblock contenido %}
+
+  <!-- Start Footer Section -->
+  <footer class="footer-section">
+    <div class="container relative">
+      <div class="sofa-img">
+        <img src="{% static 'app/images/abajo.png' %}" style="width:100%;">
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="subscription-form">
+            <h3 class="d-flex align-items-center">
+              <span class="me-1"><img src="{% static 'app/images/envelope-outline.svg' %}" alt="Image" class="img-fluid"></span>
+              <span>Hazte cliente para obtener descuentos mensualmente</span>
+            </h3>
+
+            <form action="#" class="row g-3">
+              <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Ingresa tu nombre">
+              </div>
+              <div class="col-auto">
+                <input type="email" class="form-control" placeholder="Ingresa tu e-mail">
+              </div>
+              <div class="col-auto">
+                <button class="btn btn-primary">
+                  <span class="fa fa-paper-plane">Aceptar</span>
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-5 mb-5">
+        <div class="col-lg-4">
+          <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Pet-Smart<span>.</span></a></div>
+          <p class="mb-4">Preocupados siempre de tu mascota, siempre atentos al</p>
+        </div>
+
+        <div class="col-lg-8">
+          <div class="row links-wrap">
+            <div class="col-6 col-sm-6 col-md-3">
+              <ul class="list-unstyled">
+                <li><a href="#">Acerca de nosotros</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#"></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-top copyright">
+        <div class="row pt-4">
+          <div class="col-lg-6">
+            <p class="mb-2 text-center text-lg-start">Copyright @2024</p>
+          </div>
+
+          <div class="col-lg-6 text-center text-lg-end">
+            <ul class="list-unstyled d-inline-flex ms-auto">
+              <li class="me-4"><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Privacidad</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer Section -->
+
+  <script src="{% static 'app/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'app/js/tiny-slider.js' %}"></script>
+  <script src="{% static 'app/js/custom.js' %}"></script>
+</body>
+
+</html>

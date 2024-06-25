@@ -1,0 +1,193 @@
+{% extends "dash/base.html" %} {% load static %} {% block contents %}
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Pedidos</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+      <li class="breadcrumb-item active">Ordenes</li>
+    </ol>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Ordenes de pedido
+      </div>
+      <div class="card-body">
+        <table id="datatablesSimple">
+          <thead>
+            <tr>
+              <th>Orden</th>
+              <th>Fecha de Pedido</th>
+              <th>Cliente</th>
+              <th>Total</th>
+              <th>Estado</th>
+              <th>Gestion</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Orden</th>
+              <th>Fecha de Pedido</th>
+              <th>Cliente</th>
+              <th>Total</th>
+              <th>Estado</th>
+              <th>Gestion</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <!--  'cliente', 'fecha_creacion', 'completada', 'direccion_envio', 'total'-->
+            {% for o in ordenes%}
+            <tr>
+                <td>{{o.cliente}}</td>
+                <td>{{o.fecha_creacion}}</td>
+                <td>12345678A</td>
+                <td>{{o.total}}</td>
+                <td>{{o.completada}}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="mostrarDetalles('001')"
+                  >
+                    Ver Detalles
+                  </button>
+                </td>
+              </tr>
+            {% endfor %}
+            
+            <tr>
+              <td>002</td>
+              <td>2024-04-16</td>
+              <td>98765432B</td>
+              <td>$120.00</td>
+              <td>Enviado</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="mostrarDetalles('002')"
+                >
+                  Ver Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>2024-04-17</td>
+              <td>55555555X</td>
+              <td>$80.00</td>
+              <td>Pendiente</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="mostrarDetalles('003')"
+                >
+                  Ver Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>004</td>
+              <td>2024-04-18</td>
+              <td>99999999Y</td>
+              <td>$150.00</td>
+              <td>Enviado</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="mostrarDetalles('004')"
+                >
+                  Ver Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>005</td>
+              <td>2024-04-19</td>
+              <td>11111111Z</td>
+              <td>$200.00</td>
+              <td>Pendiente</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="mostrarDetalles('005')"
+                >
+                  Ver Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>006</td>
+              <td>2024-04-20</td>
+              <td>33333333W</td>
+              <td>$90.00</td>
+              <td>Enviado</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="mostrarDetalles('006')"
+                >
+                  Ver Detalles
+                </button>
+              </td>
+            </tr>
+            <!-- Agrega más filas según sea necesario -->
+            <tr>
+              <td>038</td>
+              <td>2024-05-10</td>
+              <td>77777777Q</td>
+              <td>$110.00</td>
+              <td>Pendiente</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="mostrarDetalles('038')"
+                >
+                  Ver Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>039</td>
+              <td>2024-05-11</td>
+              <td>88888888R</td>
+              <td>$85.00</td>
+              <td>Enviado</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="mostrarDetalles('039')"
+                >
+                  Ver Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>040</td>
+              <td>2024-05-12</td>
+              <td>44444444S</td>
+              <td>$95.00</td>
+              <td>Pendiente</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="mostrarDetalles('040')"
+                >
+                  Ver Detalles
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock contents %}

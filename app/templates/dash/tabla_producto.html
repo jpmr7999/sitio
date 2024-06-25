@@ -1,0 +1,111 @@
+{% extends "dash/base.html" %} {% load static %} {% block contents %}
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Productos</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+      <li class="breadcrumb-item active">Productos</li>
+    </ol>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Lista de productos
+      </div>
+      <div class="card-body">
+        <a href="agregar_producto.html" class="btn btn-primary">
+          Agregar Producto</a
+        >
+        <hr />
+        <table id="datatablesSimple">
+          <thead>
+            <tr>
+              <th>Sku</th>
+              <th>Nombre</th>
+              <th>Categoria</th>
+              <th>Precio</th>
+              <th>Inventario</th>
+              <th>Estado</th>
+              <th>Gestion</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Sku</th>
+              <th>Nombre</th>
+              <th>Categoria</th>
+              <th>Precio</th>
+              <th>Inventario</th>
+              <th>Estado</th>
+              <th>Gestion</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {% for p in productos %}
+            <tr>  <!--   'nombre', 'precio', 'stock', 'categoria'-->
+                <td>ABC123</td>
+                <td>{{p.nombre}}</td>
+                <td>{{p.categoria}}</td>
+                <td>{{p.precio}}</td>
+                <td>{{p.stock}}</td>
+                <td>En Stock</td>
+                <td>
+                    <a href="" role="button" class="btn btn-info text-light shadow rounded">Ver detalle</a>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td>ABC123</td>
+              <td>Producto A</td>
+              <td>Collar</td>
+              <td>$99.99</td>
+              <td>50</td>
+              <td>En Stock</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  onclick="mostrarDetalles('001')"
+                >
+                  Modificar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  onclick="eliminar('001')"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>DEF456</td>
+              <td>Producto B</td>
+              <td>Plato</td>
+              <td>$49.99</td>
+              <td>30</td>
+              <td>En Stock</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  onclick="mostrarDetalles('001')"
+                >
+                  Modificar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  onclick="eliminar('001')"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock contents %}
