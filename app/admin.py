@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cliente, Perfil, Categoria, Producto, Direccion, Orden, OrdenItem, Pago, Inventario
+from .models import Cliente, Perfil, Categoria, Producto, Direccion, Orden, OrdenItem, Pago
 
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
@@ -24,9 +24,8 @@ class ProductoAdmin(admin.ModelAdmin):
 
 @admin.register(Direccion)
 class DireccionAdmin(admin.ModelAdmin):
-    list_display = ('cliente', 'direccion', 'ciudad', 'estado', 'codigo_postal', 'pais', 'tipo')
+    list_display = ('cliente', 'direccion','region', 'ciudad', 'codigo_postal', 'tipo')
     search_fields = ('cliente__nombre', 'cliente__apellidos', 'direccion', 'ciudad', 'estado', 'codigo_postal', 'pais')
-    list_filter = ('tipo', 'pais')
 
 @admin.register(Orden)
 class OrdenAdmin(admin.ModelAdmin):
@@ -45,10 +44,7 @@ class PagoAdmin(admin.ModelAdmin):
     search_fields = ('orden__cliente__nombre', 'orden__cliente__apellidos', 'transaccion_id')
     list_filter = ('metodo', 'fecha')
 
-@admin.register(Inventario)
-class InventarioAdmin(admin.ModelAdmin):
-    list_display = ('producto', 'cantidad_disponible')
-    search_fields = ('producto__nombre',)
+
 
 # Registramos los modelos sin decoradores
 # admin.site.register(Cliente, ClienteAdmin)

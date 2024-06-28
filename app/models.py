@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .choices import *
 
 
 class Cliente(models.Model):
@@ -54,17 +55,16 @@ class Producto(models.Model):
 class Direccion(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='direcciones')
     direccion = models.CharField(max_length=255)
-    ciudad = models.CharField(max_length=100)
-    estado = models.CharField(max_length=100)
+    region = models.CharField(max_length=100, choices=REGIONES_CHILE, default="REGION_BIOBIO")
+    ciudad = models.CharField(max_length=100, choices=COMUNAS_POR_REGION)
     codigo_postal = models.CharField(max_length=20)
-    pais = models.CharField(max_length=100)
     tipo = models.CharField(max_length=50)  # 'envio' o 'facturacion'
 
     def __str__(self):
         return f"{self.direccion}, {self.ciudad}, {self.estado}, {self.pais}"
 
 class Orden(models.Model):
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True, blank=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     completada = models.BooleanField(default=False)
     direccion_envio = models.ForeignKey(Direccion, on_delete=models.SET_NULL, null=True, blank=True)
@@ -77,7 +77,7 @@ class OrdenItem(models.Model):
     orden = models.ForeignKey(Orden, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    precio = models.IntegerField()
 
     def __str__(self):
         return f"{self.cantidad} x {self.producto.nombre}"
@@ -86,15 +86,10 @@ class Pago(models.Model):
     orden = models.OneToOneField(Orden, on_delete=models.CASCADE)
     metodo = models.CharField(max_length=50)
     transaccion_id = models.CharField(max_length=100)
-    monto = models.DecimalField(max_digits=10, decimal_places=2)
+    monto = models.IntegerField()
     fecha = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Pago {self.transaccion_id} - Monto: {self.monto}"
 
-class Inventario(models.Model):
-    producto = models.OneToOneField(Producto, on_delete=models.CASCADE)
-    cantidad_disponible = models.IntegerField()
 
-    def __str__(self):
-        return f"{self.producto.nombre} - Stock: {self.cantidad_disponible}"
