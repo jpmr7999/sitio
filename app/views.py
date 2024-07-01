@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from .models import Producto, Orden, Cliente, OrdenItem
-from .forms import ProductoForm
+from .forms import ProductoForm, CrearUsuario
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+
+def perfil(request):
+    return render(request, 'app/perfil.html')
 def about(request):
     return render(request, 'app/about.html')
 
@@ -39,11 +44,19 @@ def thankyou(request):
 def dash(request):
     return render(request, 'dash/index.html')
 
-def loginn(request):
-    return render(request, 'dash/login.html')
-
 def register(request):
-    return render(request, 'dash/register.html')
+    if request.method == 'POST':
+        form = CrearUsuario(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('index')  # Redirige a la página principal u otra página
+    else:
+        form = CrearUsuario()
+    return render(request, 'dash/register.html', {'form': form})
 
 def password(request):
     return render(request, 'dash/password.html')

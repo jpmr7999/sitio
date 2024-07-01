@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,38 +38,11 @@
   <div class="row justify-content-center">
     <div class="col-lg-6">
       <h2 class="mb-4">Formulario de Registro</h2>
-      <form id="registroForm" method="POST" action="login.html">
-        <!-- Nombre -->
-        <div class="mb-3">
-          <label for="nombre" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" required>
-        </div>
-        <!-- Apellido -->
-        <div class="mb-3">
-          <label for="apellido" class="form-label">Apellido</label>
-          <input type="text" class="form-control" id="apellido" name="apellido" required>
-        </div>
-        <!-- Correo Electrónico -->
-        <div class="mb-3">
-          <label for="email" class="form-label">Correo Electrónico</label>
-          <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <!-- Contraseña -->
-        <div class="mb-3">
-          <label for="password" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <!-- Repetir Contraseña -->
-        <div class="mb-3">
-          <label for="confirmPassword" class="form-label">Repetir Contraseña</label>
-          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-        </div>
-        <!-- Botones -->
-        <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-primary">Registrarse</button>
-          <a href="login.html" class="btn btn-secondary">¿Tienes cuenta? Inicia sesión</a>
-        </div>
-      </form>
+      <form method="post">
+        {% csrf_token %}
+        {{ form | crispy  }}
+        <button type="submit">Registrarse</button>
+    </form>
     </div>
   </div>
   <div id="layoutAuthentication_footer">

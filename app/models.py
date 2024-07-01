@@ -4,12 +4,10 @@ from .choices import *
 
 
 class Cliente(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    email = models.EmailField(unique=True, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255)
     apellidos = models.CharField(max_length=255)
     telefono = models.CharField(max_length=20, blank=True, null=True)
-    direccion = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.nombre} {self.apellidos}"
@@ -21,15 +19,7 @@ class Cliente(models.Model):
             return self.email
 
 
-class Perfil(models.Model):
-    cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE)
-    fecha_nacimiento = models.DateField(blank=True, null=True)
-    genero = models.CharField(max_length=10, blank=True, null=True)
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
-    biografia = models.TextField(blank=True, null=True)
 
-    def __str__(self):
-        return self.cliente.nombre
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=255)

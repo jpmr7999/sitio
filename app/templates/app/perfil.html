@@ -1,0 +1,31 @@
+<!-- templates/some_page.html -->
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Bienvenido: </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#secondaryNavbar" aria-controls="secondaryNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="secondaryNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Mi perfil</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#">Mis pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Mis direcciones</a>
+        </li>
+        
+    </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <h1>Página con Navbar Secundaria</h1>
+  <p>Contenido de la página va aquí...</p>
+</div>
+{% endblock contenido %}

@@ -1,15 +1,12 @@
 from django.contrib import admin
-from .models import Cliente, Perfil, Categoria, Producto, Direccion, Orden, OrdenItem, Pago
+from .models import Cliente, Categoria, Producto, Direccion, Orden, OrdenItem, Pago
 
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'apellidos', 'email', 'telefono')
-    search_fields = ('nombre', 'apellidos', 'email')
+    list_display = ('nombre', 'apellidos', 'telefono')
+    search_fields = ('nombre', 'apellidos')
 
-@admin.register(Perfil)
-class PerfilAdmin(admin.ModelAdmin):
-    list_display = ('cliente', 'fecha_nacimiento', 'genero')
-    search_fields = ('cliente__nombre', 'cliente__apellidos')
+
 
 @admin.register(Categoria)
 class CategoriaAdmin(admin.ModelAdmin):

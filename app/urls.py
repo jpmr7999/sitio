@@ -7,6 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('perfil/', perfil, name='perfil'),
     path('about/', about, name='about'),
     path('base/', base, name='base'),
     path('cart/', cart, name='cart'),
@@ -18,7 +19,6 @@ urlpatterns = [
     path('shop/', shop, name='shop'),
     path('thankyou/', thankyou, name='thankyou'),
     path('dash/', dash, name='dash'),
-    path('dash/login/', loginn, name='loginn'),
     path('dash/register/', register, name='register'),
     path('dash/password/', password, name='password'),
     path('dash/tabla_clientes/', tabla_clientes, name='tabla_clientes'),
