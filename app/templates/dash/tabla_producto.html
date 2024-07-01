@@ -16,6 +16,10 @@
         <a href="{% url "agregar_producto" %}" class="btn btn-primary">
           Agregar Producto</a
         >
+       
+        <a href="{% url "agregar_categoria" %}" class="btn btn-primary">
+          Agregar Categoria</a
+        >
         <hr />
         <table id="datatablesSimple">
           <thead>
@@ -54,54 +58,8 @@
                 </td>
             </tr>
             {% endfor %}
-            <tr>
-              <td>ABC123</td>
-              <td>Producto A</td>
-              <td>Collar</td>
-              <td>$99.99</td>
-              <td>50</td>
-              <td>En Stock</td>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  onclick="mostrarDetalles('001')"
-                >
-                  Modificar
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-danger btn-sm"
-                  onclick="eliminar('001')"
-                >
-                  Eliminar
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>DEF456</td>
-              <td>Producto B</td>
-              <td>Plato</td>
-              <td>$49.99</td>
-              <td>30</td>
-              <td>En Stock</td>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  onclick="mostrarDetalles('001')"
-                >
-                  Modificar
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-danger btn-sm"
-                  onclick="eliminar('001')"
-                >
-                  Eliminar
-                </button>
-              </td>
-            </tr>
+            
+            
           </tbody>
         </table>
       </div>

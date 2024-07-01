@@ -44,7 +44,7 @@
         <h2 class="display-3 text-black">Gracias</h2>
         <p class="lead mb-5">Su orden {{orden}} ya va en camino.</p>
         <p>
-          <a href="shop.html" class="btn btn-sm btn-outline-black"
+          <a href="{% url 'shop' %}" class="btn btn-sm btn-outline-black"
             >Volver a la Tienda</a
           >
         </p>
@@ -74,7 +74,7 @@
 <script>
   function descargarArchivo() {
     // Ruta al archivo PDF
-    var archivoPDF = "boleta.pdf";
+    var archivoPDF = "{% static 'app/boleta.pdf' %}";
 
     // Crear un enlace temporal
     var link = document.createElement("a");

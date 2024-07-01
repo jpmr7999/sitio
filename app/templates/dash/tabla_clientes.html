@@ -21,93 +21,36 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Rut</th>
+                                            <th>ID</th>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
                                             <th>Email</th>
-                                            <th>Tipo</th>
-                                            <th>Ordenes pendientes</th>
-                                            <th>Gestion</th>
+                                            <th>Telefono</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Rut</th>
+                                            <th>ID</th>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
                                             <th>Email</th>
-                                            <th>Tipo</th>
-                                            <th>Ordenes pendientes</th>
-                                            <th>Gestion</th>
+                                            <th>Telefono</th>
+                                           
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <td>99999999A</td>
-                                            <td>Juan</td>
-                                            <td>Peres</td>
-                                            <td>juan@gm.cl</td>
-                                            <td>Registrado</td>
-                                            <td>0</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
-                                            </td>
-                                          </tr>
-                                          <td>99999999A</td>
-                                            <td>Juan</td>
-                                            <td>Peres</td>
-                                            <td>juan@gm.cl</td>
-                                            <td>Registrado</td>
-                                            <td>0</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
-                                            </td>
-                                          </tr>
-                                          <td>99999999A</td>
-                                            <td>Juan</td>
-                                            <td>Peres</td>
-                                            <td>juan@gm.cl</td>
-                                            <td>Registrado</td>
-                                            <td>0</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
-                                            </td>
-                                          </tr>
-                                          <td>99999999A</td>
-                                            <td>Juan</td>
-                                            <td>Peres</td>
-                                            <td>juan@gm.cl</td>
-                                            <td>Registrado</td>
-                                            <td>0</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
-                                            </td>
-                                          </tr>
-                                          <td>99999999A</td>
-                                            <td>Juan</td>
-                                            <td>Peres</td>
-                                            <td>juan@gm.cl</td>
-                                            <td>Registrado</td>
-                                            <td>0</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
-                                            </td>
-                                          </tr>
-                                          <td>99999999A</td>
-                                            <td>Juan</td>
-                                            <td>Peres</td>
-                                            <td>juan@gm.cl</td>
-                                            <td>Registrado</td>
-                                            <td>0</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm" onclick="mostrarDetalles('001')">Modificar</button>
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminar('001')">Eliminar</button>
-                                            </td>
-                                          </tr>
+                                        {% for p in clientes %}
+                                        <tr>  <!--   'nombre', 'precio', 'stock', 'categoria'-->
+                                            <td>{{p.id}}</td>
+                                            <td>{{p.nombre}}</td>
+                                            <td>{{p.apellidos}}</td>
+                                            <td>{{p.email}}</td>
+                                            <td>{{p.telefono}}</td>
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                          
                                           
                                     </tbody>
                                     

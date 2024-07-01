@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto, Orden, Cliente, OrdenItem
-from .forms import ProductoForm, CrearUsuario
+from .forms import ProductoForm, CrearUsuario, CategoriaForm, OrdenForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
@@ -173,7 +173,7 @@ def tabla_clientes(request):
         "clientes":clientes
     }
     
-    return render(request, 'dash/tabla_clientes.html')
+    return render(request, 'dash/tabla_clientes.html', datos)
 
 def tabla_ordenes(request):
     ordenes=Orden.objects.all()
@@ -206,6 +206,32 @@ def agregar_producto(request):
     }
     return render(request, 'dash/agregar_producto.html',datos)
 
+def agregar_categoria(request):
+    form=CategoriaForm()
+
+    if request.method=="POST":
+        form=CategoriaForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(to="tabla_producto")
+
+    datos={
+        "form":form
+    }
+    return render(request, 'dash/agregar_producto.html',datos)
+def agregar_orden(request):
+    form=OrdenForm()
+
+    if request.method=="POST":
+        form=OrdenForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(to="tabla_producto")
+
+    datos={
+        "form":form
+    }
+    return render(request, 'dash/agregar_producto.html',datos)
 def modificar_producto(request):
     return render(request, 'dash/modificar_producto.html')
 
