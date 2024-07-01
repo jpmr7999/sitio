@@ -84,9 +84,12 @@
             </li>
             {% else %}
             <li>
-              <a class="nav-link px-5 text-light" href="{% url 'login' %}"
+              <a class="nav-link text-light" href="{% url 'login' %}"
                 ><strong>Inicio de Sesión</strong></a
               >
+            </li>
+            <li>
+              <a class="nav-link text-light" href="{% url "register" %}" class="text-primary nav-link"><strong>Crear cuenta</strong></a>
             </li>
             {% endif %}
             <li>

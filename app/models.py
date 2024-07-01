@@ -7,6 +7,7 @@ class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255)
     apellidos = models.CharField(max_length=255)
+    email = models.EmailField(blank=True, null=True)
     telefono = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
@@ -62,10 +63,17 @@ class Orden(models.Model):
 
     def __str__(self):
         return f"Orden {self.id} - Cliente: {self.cliente}"
+    
+    def calcular_total(self):
+        orden_items = OrdenItem.objects.filter(orden=self)
+        total = sum(item.cantidad * item.precio for item in orden_items)
+        self.total = total
+        self.save()
+        return total
 
 class OrdenItem(models.Model):
     orden = models.ForeignKey(Orden, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True)
     cantidad = models.IntegerField()
     precio = models.IntegerField()
 

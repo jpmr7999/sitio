@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'app',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django.contrib.humanize',
 ]
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

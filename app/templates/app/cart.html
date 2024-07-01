@@ -1,7 +1,4 @@
-{% extends "app/base.html" %}
-{% load static %}
-
-{% block contenido %}
+{% extends "app/base.html" %} {% load static %} {% block contenido %}
 <!-- Start Hero Section -->
 <div class="hero">
   <div class="container">
@@ -34,17 +31,25 @@
               </tr>
             </thead>
             <tbody>
-              {% for o in ordenitem %}
+              {% for o in ordenitems %}
               <tr class="product-row" id="product{{ o.id }}">
                 <td class="product-thumbnail">
+                  {% if o.producto.imagen %}
                   <img
-                    src="{% static 'app/images/product-1.png' %}"
-                    alt="Image"
+                    src="{{ o.producto.imagen.url }}"
+                    alt="Imagen del Producto"
                     class="img-fluid"
                   />
+                  {% else %}
+                  <img
+                    src="{% static 'app/images/default-product-image.png' %}"
+                    alt="Imagen por defecto"
+                    class="img-fluid"
+                  />
+                  {% endif %}
                 </td>
                 <td class="product-name">
-                  <h2 class="h5 text-black">{{ o.producto }}</h2>
+                  <h2 class="h5 text-black">{{ o.producto.nombre }}</h2>
                 </td>
                 <td class="product-price">${{ o.producto.precio }}</td>
                 <td>
@@ -52,38 +57,82 @@
                     class="input-group mb-3 d-flex align-items-center quantity-container"
                     style="max-width: 120px"
                   >
-                    <div class="input-group-prepend">
-                      <button
-                        class="btn btn-outline-black"
-                        type="button"
-                        onclick="updateTotal('{{ o.id }}', -1)"
-                      >
-                        &minus;
-                      </button>
-                    </div>
-                    <input
-                      id="cantidad{{ o.id }}"
-                      type="number"
-                      class="form-control text-center quantity-amount"
-                      value="{{ o.cantidad }}"
-                      placeholder=""
-                      aria-label="Example text with button addon"
-                      aria-describedby="button-addon1"
-                      onchange="updateTotal('{{ o.id }}', 0)"
-                    />
-                    <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-black"
-                        type="button"
-                        onclick="updateTotal('{{ o.id }}', 1)"
-                      >
-                        &plus;
-                      </button>
-                    </div>
+                    <form method="POST" action="{% url 'cart' %}">
+                      {% csrf_token %}
+                      <!-- Aquí van los campos del formulario -->
+                      <input
+                        type="hidden"
+                        id="accion"
+                        name="accion"
+                        value="actualizar"
+                      />
+                      <input
+                        type="hidden"
+                        id="productoid"
+                        name="productoid"
+                        value="{{o.producto.id}}"
+                      />
+                      <input
+                        type="hidden"
+                        id="ordenitemid"
+                        name="ordenitemid"
+                        value="{{o.id}}"
+                      />
+                      <!-- Otros campos del formulario -->
+                      <br />
+                      <div class="input-group-prepend">
+                        <button
+                          class="btn btn-outline-black"
+                          type="button"
+                          onclick="updateTotal('{{ o.id }}', -1)"
+                        >
+                          &minus;
+                        </button>
+                      </div>
+                      <input
+                        id="cantidad{{ o.id }}"
+                        type="number"
+                        name="cantidad"
+                        class="form-control text-center quantity-amount"
+                        value="{{ o.cantidad }}"
+                        placeholder=""
+                        aria-label="Cantidad del Producto"
+                        aria-describedby="button-addon1"
+                        onchange="updateTotal('{{ o.id }}', 0)"
+                      />
+                      <div class="input-group-append">
+                        <button
+                          class="btn btn-outline-black"
+                          type="button"
+                          onclick="updateTotal('{{ o.id }}', 1)"
+                        >
+                          &plus;
+                        </button>
+                      </div>
+                      <button class="btn" type="submit">Actualizar</button>
+                    </form>
                   </div>
                 </td>
-                <td class="product-total">${{ o.producto.precio }}</td>
-                <td><a href="#" class="btn btn-black btn-sm">X</a></td>
+                <td class="product-total">${{ o.precio }}</td>
+                <td>
+                  <form method="POST" action="{% url 'cart' %}">
+                    {% csrf_token %}
+                    <!-- Aquí van los campos del formulario -->
+                    <input
+                      type="hidden"
+                      id="accion"
+                      name="accion"
+                      value="eliminar"
+                    />
+                    <input
+                      type="hidden"
+                      id="ordenitemid"
+                      name="ordenitemid"
+                      value="{{o.id}}"
+                    />
+                    <button class="btn btn-black btn-sm" type="submit">X</button>
+                  <form>
+                </td>
               </tr>
               {% endfor %}
             </tbody>
@@ -160,12 +209,14 @@
 
             <div class="row">
               <div class="col-md-12">
-                <button
-                  class="btn btn-black btn-lg py-3 btn-block"
-                  onclick="window.location='{% url 'checkout' %}'"
-                >
-                  Pagar
-                </button>
+
+                <form method="POST" action="{% url 'checkout' %}">
+                  {% csrf_token %}
+                  <!-- Aquí van los campos del formulario -->
+                  
+                  <input type="hidden" id="total-input" name="total" value="{{orden.id}}"/>
+                  <button class="btn btn-black btn-lg py-3 btn-block" type="submit">Pagar</button>
+                </form>
               </div>
             </div>
           </div>
@@ -201,18 +252,27 @@
     var subtotalTotal = 0;
 
     productos.forEach(function (producto) {
-      var precio = parseFloat(producto.querySelector(".product-price").textContent.trim().replace("$", ""));
+      var precio = parseFloat(
+        producto
+          .querySelector(".product-price")
+          .textContent.trim()
+          .replace("$", "")
+      );
       var cantidad = parseInt(producto.querySelector(".quantity-amount").value);
       var subtotal = precio * cantidad;
 
-      producto.querySelector(".product-total").textContent = "$" + subtotal.toFixed(0);
+      producto.querySelector(".product-total").textContent =
+        "$" + subtotal.toFixed(0);
       subtotalTotal += subtotal;
     });
 
-    document.getElementById("subtotal").textContent = "$" + subtotalTotal.toFixed(0);
+    document.getElementById("subtotal").textContent =
+      "$" + subtotalTotal.toFixed(0);
 
-    var total = subtotalTotal * 1.19; // 19% de impuestos
+    var total = subtotalTotal; // 19% de impuestos
     document.getElementById("total").textContent = "$" + total.toFixed(0);
+
+    document.getElementById("total-input").value = total;
   }
 
   // Llamar a la función inicial para actualizar los totales cuando se carga la página
