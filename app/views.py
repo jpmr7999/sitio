@@ -19,72 +19,70 @@ def base(request):
 @login_required
 def cart(request):
     if request.method == 'POST':
-        accion = request.POST['accion']
-        
+        accion = request.POST.get('accion')
         
         if accion == 'actualizar':
             try:
-                ordenidi = request.POST['ordenitemid']
-                product_id = request.POST['productoid']
-                cantidad = int(request.POST['cantidad'])
+                ordenitem_id = request.POST.get('ordenitemid')
+                product_id = request.POST.get('productoid')
+                cantidad = int(request.POST.get('cantidad'))
                 
                 # Obtener el producto y calcular el precio del item
                 producto = Producto.objects.get(id=product_id)
                 precio_item = producto.precio * cantidad
                 
                 # Obtener o crear el OrdenItem y actualizarlo
-                ordenit, created = OrdenItem.objects.get_or_create(id=ordenidi)
-                ordenit.cantidad = cantidad
-                ordenit.precio = precio_item
-                ordenit.save()
+                ordenitem, created = OrdenItem.objects.get_or_create(id=ordenitem_id)
+                ordenitem.cantidad = cantidad
+                ordenitem.precio = precio_item
+                ordenitem.save()
                 
-                return redirect("cart")  # Redirigir al carrito si todo está correcto
+                messages.success(request, 'El item ha sido actualizado correctamente.')
+                return redirect("cart")
             except (KeyError, Producto.DoesNotExist):
-                # Manejar errores de datos incorrectos o productos no existentes
-                return redirect("cart")  # Redirigir al carrito en caso de error
+                messages.error(request, 'Error al actualizar el item.')
+                return redirect("cart")
             
         elif accion == 'eliminar':
-            ordenidi = request.POST['ordenitemid']
-            orden = get_object_or_404(OrdenItem, id=ordenidi)
-            orden.delete()
-            print("eliminado")
-            return redirect("cart")  # Redirigir al carrito si todo está correcto
-        else:
+            try:
+                ordenitem_id = request.POST.get('ordenitemid')
+                ordenitem = get_object_or_404(OrdenItem, id=ordenitem_id)
+                ordenitem.delete()
+                
+                messages.success(request, 'El item ha sido eliminado correctamente.')
+                return redirect("cart")
+            except (KeyError, OrdenItem.DoesNotExist):
+                messages.error(request, 'Error al eliminar el item.')
+                return redirect("cart")
+                
+        else:  # Añadir nuevo item al carrito
             try:
                 cliente = Cliente.objects.get(user=request.user)
                 ordenes = Orden.objects.filter(cliente=cliente)
-                product_id = request.POST['productoid']
-                cantidad = int(request.POST['cantidad'])
+                product_id = request.POST.get('productoid')
+                cantidad = int(request.POST.get('cantidad'))
                 producto = Producto.objects.get(id=product_id)
                 
                 # Calcular el precio del item
                 precio_item = producto.precio * cantidad
                 
-                tiene_ordenes_incompletas = any(not orden.completada for orden in ordenes)
+                orden_incompleta = Orden.objects.filter(cliente=cliente, completada=False).first()
                 
-                if tiene_ordenes_incompletas:
-                    orden_incompleta = Orden.objects.filter(cliente=cliente, completada=False).first()
-                    # Crear el OrdenItem con precio calculado
+                if orden_incompleta:
                     item = OrdenItem.objects.create(orden=orden_incompleta, producto=producto, cantidad=cantidad, precio=precio_item)
                 else:
                     nueva_orden = Orden.objects.create(cliente=cliente)
-                    # Crear el OrdenItem con precio calculado
                     item = OrdenItem.objects.create(orden=nueva_orden, producto=producto, cantidad=cantidad, precio=precio_item)
-                    
+                
+                messages.success(request, 'El item ha sido añadido al carrito.')
                 return redirect("cart")
-        
             except KeyError:
-                # Redirigir a 'cart' si falta información en el formulario
                 messages.error(request, 'Falta información en el formulario.')
                 return redirect("cart")
-            
             except Cliente.DoesNotExist:
-                # Redirigir a 'cart' si el cliente no existe
                 messages.error(request, 'Debe iniciar sesión como cliente.')
                 return redirect("cart")
-            
             except Producto.DoesNotExist:
-                # Redirigir a 'cart' si el producto no existe
                 messages.error(request, 'El producto seleccionado no existe.')
                 return redirect("cart")
     
@@ -96,6 +94,8 @@ def checkout(request):
     cliente = Cliente.objects.get(user=request.user)
     orden_incompleta = Orden.objects.filter(cliente=cliente, completada=False).first()
     orden_incompleta.calcular_total()
+    orden_incompleta.completada = True
+    orden_incompleta.save()
     ordenes=OrdenItem.objects.filter(orden=orden_incompleta)
     datos={
         'cliente':cliente,

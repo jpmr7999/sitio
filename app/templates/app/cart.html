@@ -1,4 +1,6 @@
-{% extends "app/base.html" %} {% load static %} {% block contenido %}
+{% extends "app/base.html" %}
+{% load static %}
+{% block contenido %}
 <!-- Start Hero Section -->
 <div class="hero">
   <div class="container">
@@ -18,6 +20,7 @@
   <div class="container">
     <div class="row mb-5">
       <form class="col-md-12" method="post">
+        {% csrf_token %}
         <div class="site-blocks-table">
           <table class="table">
             <thead>
@@ -59,57 +62,21 @@
                   >
                     <form method="POST" action="{% url 'cart' %}">
                       {% csrf_token %}
-                      <!-- Aquí van los campos del formulario -->
-                      <input
-                        type="hidden"
-                        id="accion"
-                        name="accion"
-                        value="actualizar"
-                      />
-                      <input
-                        type="hidden"
-                        id="productoid"
-                        name="productoid"
-                        value="{{o.producto.id}}"
-                      />
-                      <input
-                        type="hidden"
-                        id="ordenitemid"
-                        name="ordenitemid"
-                        value="{{o.id}}"
-                      />
-                      <!-- Otros campos del formulario -->
-                      <br />
+                      <input type="hidden" name="accion" value="actualizar"/>
+                      <input type="hidden" name="productoid" value="{{o.producto.id}}"/>
+                      <input type="hidden" name="ordenitemid" value="{{o.id}}"/>
                       <div class="input-group-prepend">
-                        <button
-                          class="btn btn-outline-black"
-                          type="button"
-                          onclick="updateTotal('{{ o.id }}', -1)"
-                        >
+                        <button class="btn btn-outline-black" type="button" onclick="updateTotal('{{ o.id }}', -1)">
                           &minus;
                         </button>
                       </div>
-                      <input
-                        id="cantidad{{ o.id }}"
-                        type="number"
-                        name="cantidad"
-                        class="form-control text-center quantity-amount"
-                        value="{{ o.cantidad }}"
-                        placeholder=""
-                        aria-label="Cantidad del Producto"
-                        aria-describedby="button-addon1"
-                        onchange="updateTotal('{{ o.id }}', 0)"
-                      />
+                      <input id="cantidad{{ o.id }}" type="number" name="cantidad" class="form-control text-center quantity-amount" value="{{ o.cantidad }}" onchange="updateTotal('{{ o.id }}', 0)"/>
                       <div class="input-group-append">
-                        <button
-                          class="btn btn-outline-black"
-                          type="button"
-                          onclick="updateTotal('{{ o.id }}', 1)"
-                        >
+                        <button class="btn btn-outline-black" type="button" onclick="updateTotal('{{ o.id }}', 1)">
                           &plus;
                         </button>
                       </div>
-                      <button class="btn" type="submit">Actualizar</button>
+                      <button class="btn btn-black btn-sm" type="submit">Actualizar</button>
                     </form>
                   </div>
                 </td>
@@ -117,21 +84,10 @@
                 <td>
                   <form method="POST" action="{% url 'cart' %}">
                     {% csrf_token %}
-                    <!-- Aquí van los campos del formulario -->
-                    <input
-                      type="hidden"
-                      id="accion"
-                      name="accion"
-                      value="eliminar"
-                    />
-                    <input
-                      type="hidden"
-                      id="ordenitemid"
-                      name="ordenitemid"
-                      value="{{o.id}}"
-                    />
+                    <input type="hidden" name="accion" value="eliminar"/>
+                    <input type="hidden" name="ordenitemid" value="{{o.id}}"/>
                     <button class="btn btn-black btn-sm" type="submit">X</button>
-                  <form>
+                  </form>
                 </td>
               </tr>
               {% endfor %}
@@ -145,40 +101,7 @@
       <div class="col-md-6">
         <div class="row mb-5">
           <div class="col-md-6">
-            <div class="row mb-5">
-              <div class="col-md-6">
-                <a
-                  href="{% url 'shop' %}"
-                  class="btn btn-outline-black btn-sm btn-block"
-                  >Continuar comprando</a
-                >
-              </div>
-              <div class="col-md-6">
-                <button
-                  class="btn btn-black btn-sm btn-block"
-                  onclick="updateCart()"
-                >
-                  Actualizar Carrito
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <label class="text-black h4" for="coupon">Cupon</label>
-            <p>Entra un código de cupón.</p>
-          </div>
-          <div class="col-md-8 mb-3 mb-md-0">
-            <input
-              type="text"
-              class="form-control py-3"
-              id="coupon"
-              placeholder="Coupon Code"
-            />
-          </div>
-          <div class="col-md-4">
-            <button class="btn btn-black">Aplicar Cupón</button>
+            <a href="{% url 'shop' %}" class="btn btn-outline-black btn-sm btn-block">Continuar comprando</a>
           </div>
         </div>
       </div>
@@ -209,12 +132,9 @@
 
             <div class="row">
               <div class="col-md-12">
-
                 <form method="POST" action="{% url 'checkout' %}">
                   {% csrf_token %}
-                  <!-- Aquí van los campos del formulario -->
-                  
-                  <input type="hidden" id="total-input" name="total" value="{{orden.id}}"/>
+                  <input type="hidden" id="total-input" name="total" value=""/>
                   <button class="btn btn-black btn-lg py-3 btn-block" type="submit">Pagar</button>
                 </form>
               </div>
@@ -230,53 +150,33 @@
 <script src="{% static 'app/js/tiny-slider.js' %}"></script>
 <script src="{% static 'app/js/custom.js' %}"></script>
 <script>
-  function updateTotal(id, cambio) {
-    // Obtener la cantidad actual del producto
-    var cantidadInput = document.getElementById("cantidad" + id);
-    var cantidad = parseInt(cantidadInput.value) + cambio;
+  document.addEventListener('DOMContentLoaded', function () {
+    actualizarTotal();
+  });
 
-    // Asegurar que la cantidad no sea negativa
-    if (cantidad < 0) {
-      cantidad = 0;
+  function updateTotal(ordenItemId, cambio) {
+    var cantidadInput = document.getElementById('cantidad' + ordenItemId);
+    var nuevaCantidad = parseInt(cantidadInput.value) + cambio;
+    if (nuevaCantidad < 1) {
+      nuevaCantidad = 1;
     }
-
-    // Actualizar el valor del input de cantidad
-    cantidadInput.value = cantidad;
-
-    // Llamar a la función para actualizar el carrito
-    updateCart();
+    cantidadInput.value = nuevaCantidad;
+    actualizarTotal();
   }
 
-  function updateCart() {
-    var productos = document.querySelectorAll(".product-row");
-    var subtotalTotal = 0;
-
-    productos.forEach(function (producto) {
-      var precio = parseFloat(
-        producto
-          .querySelector(".product-price")
-          .textContent.trim()
-          .replace("$", "")
-      );
-      var cantidad = parseInt(producto.querySelector(".quantity-amount").value);
-      var subtotal = precio * cantidad;
-
-      producto.querySelector(".product-total").textContent =
-        "$" + subtotal.toFixed(0);
-      subtotalTotal += subtotal;
+  function actualizarTotal() {
+    var productos = document.getElementsByClassName('product-row');
+    var subtotal = 0;
+    Array.prototype.forEach.call(productos, function (producto) {
+      var precio = parseFloat(producto.querySelector('.product-price').textContent.replace('$', ''));
+      var cantidad = parseInt(producto.querySelector('.quantity-amount').value);
+      var total = precio * cantidad;
+      producto.querySelector('.product-total').textContent = '$' + total.toFixed(2);
+      subtotal += total;
     });
-
-    document.getElementById("subtotal").textContent =
-      "$" + subtotalTotal.toFixed(0);
-
-    var total = subtotalTotal; // 19% de impuestos
-    document.getElementById("total").textContent = "$" + total.toFixed(0);
-
-    document.getElementById("total-input").value = total;
+    document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+    document.getElementById('total').textContent = '$' + subtotal.toFixed(2);
+    document.getElementById('total-input').value = subtotal.toFixed(2);
   }
-
-  // Llamar a la función inicial para actualizar los totales cuando se carga la página
-  updateCart();
 </script>
-
-{% endblock contenido %}
+{% endblock %}
