@@ -1,13 +1,58 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Orden, Cliente, OrdenItem
-from .forms import ProductoForm, CrearUsuario, CategoriaForm, OrdenForm
+from .models import Producto, Orden, Cliente, OrdenItem, Direccion
+from .forms import ProductoForm, CrearUsuario, CategoriaForm, OrdenForm,UpdateClienteForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
+
+def detalleorden(request,id):
+    orden=get_object_or_404(Orden, id=id)
+    items = OrdenItem.objects.filter(orden=orden)
+    datos={
+         "orden":orden,
+         'items':items
+     }
+    return render(request, 'app/detalleorden.html',datos)
+
+def misordenes(request):
+    cliente = Cliente.objects.get(user=request.user)
+    ordenes = Orden.objects.filter(cliente=cliente)
+    datos={
+        'cliente':cliente,
+        'ordenes':ordenes
+    }
+    
+    return render(request, 'app/misordenes.html',datos)
+
+def misdirecciones(request):
+    cliente = Cliente.objects.get(user=request.user)
+    direcciones = Direccion.objects.filter(cliente=cliente)
+    datos={
+        'cliente':cliente,
+        'direcciones':direcciones
+    }
+    return render(request, 'app/misdirecciones.html', datos)
+
 def perfil(request):
-    return render(request, 'app/perfil.html')
+    cliente = Cliente.objects.get(user=request.user)
+
+    form=UpdateClienteForm(instance=cliente)
+    datos={
+        "form":form,
+        "cliente":cliente
+    }
+
+    if request.method=="POST":
+        form=UpdateClienteForm(data=request.POST, files=request.FILES, instance=cliente)
+        if form.is_valid():
+            form.save()
+            messages.warning(request,'Datos Modificados')
+            return redirect(to='perfil')
+    
+    return render(request, 'app/perfil.html',datos)
+
 def about(request):
     return render(request, 'app/about.html')
 
@@ -32,14 +77,14 @@ def cart(request):
                 precio_item = producto.precio * cantidad
                 
                 # Obtener o crear el OrdenItem y actualizarlo
-                ordenitem, created = OrdenItem.objects.get_or_create(id=ordenitem_id)
+                ordenitem = OrdenItem.objects.get(id=ordenitem_id)
                 ordenitem.cantidad = cantidad
                 ordenitem.precio = precio_item
                 ordenitem.save()
                 
                 messages.success(request, 'El item ha sido actualizado correctamente.')
                 return redirect("cart")
-            except (KeyError, Producto.DoesNotExist):
+            except (KeyError, Producto.DoesNotExist, OrdenItem.DoesNotExist):
                 messages.error(request, 'Error al actualizar el item.')
                 return redirect("cart")
             
@@ -58,7 +103,6 @@ def cart(request):
         else:  # Añadir nuevo item al carrito
             try:
                 cliente = Cliente.objects.get(user=request.user)
-                ordenes = Orden.objects.filter(cliente=cliente)
                 product_id = request.POST.get('productoid')
                 cantidad = int(request.POST.get('cantidad'))
                 producto = Producto.objects.get(id=product_id)
@@ -86,7 +130,8 @@ def cart(request):
                 messages.error(request, 'El producto seleccionado no existe.')
                 return redirect("cart")
     
-    ordenitems = OrdenItem.objects.filter(orden__cliente__user=request.user)
+    cliente = Cliente.objects.get(user=request.user)
+    ordenitems = OrdenItem.objects.filter(orden__cliente=cliente, orden__completada=False)
     datos = {'ordenitems': ordenitems}
     return render(request, 'app/cart.html', datos)
 

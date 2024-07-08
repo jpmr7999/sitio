@@ -1,3 +1,8 @@
+ESTADO_ENVIO = {
+    ('EN_PREPARACION', 'En preparacion'),
+    ('ENVIADO', 'Enviado'),
+    ('ENTREGADO', 'Entregado'),
+}
 REGIONES_CHILE = {
     ("REGION_ARICA_PARINACOTA", "Región de Arica y Parinacota"),
     ("REGION_TARAPACA", "Región de Tarapacá"),

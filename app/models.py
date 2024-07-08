@@ -58,8 +58,9 @@ class Orden(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True, blank=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     completada = models.BooleanField(default=False)
+    estado = models.CharField(max_length=100, choices=ESTADO_ENVIO, null=True, blank=True)
     direccion_envio = models.ForeignKey(Direccion, on_delete=models.SET_NULL, null=True, blank=True)
-    total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    total = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f"Orden {self.id} - Cliente: {self.cliente}"

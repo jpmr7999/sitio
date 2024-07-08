@@ -1,7 +1,14 @@
 from django import forms
-from .models import Producto, Direccion, Categoria, Direccion, Orden
+from .models import Producto, Direccion, Categoria, Direccion, Orden, Cliente
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+
+class UpdateClienteForm(forms.ModelForm):
+
+    class Meta:
+        model = Cliente
+        fields = ['nombre','apellidos', 'telefono']
+
 
 class OrdenForm(forms.ModelForm):
 

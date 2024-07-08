@@ -7,7 +7,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    
+    path('detalleorden/<id>', detalleorden, name='detalleorden'),
+    path('misordenes/', misordenes, name='misordenes'),
+    path('misdirecciones/', misdirecciones, name='misdirecciones'),
     path('perfil/', perfil, name='perfil'),
     path('about/', about, name='about'),
     path('base/', base, name='base'),

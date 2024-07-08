@@ -17,7 +17,7 @@
       name="keywords"
       content="mascotas, tienda de mascotas, suministros para mascotas, cuidado de mascotas"
     />
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap CSS -->
     <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet" />
     <link href="{% static 'app/css/all.min.css' %}" rel="stylesheet" />
@@ -195,3 +195,51 @@
     <script src="{% static 'app/js/custom.js' %}"></script>
   </body>
 </html>
+{% if messages %} 
+
+        {% for message in messages %}
+            {% if message.level == 25 %}
+              {% comment %}   <div class="alert alert-success alert-dismissible mt-3">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Operación Realizada: </strong>{{message}} 
+                </div> {% endcomment %}
+                <script>
+                    Swal.fire({
+                        title: 'Operación exitosa!',
+                        text: '{{message}}',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                      })
+                </script>
+            {% endif %}
+            {% if message.level == 30 %}
+               {% comment %}  <div class="alert alert-warning alert-dismissible mt-3">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Alerta: </strong>{{message}} 
+                </div> {% endcomment %}
+                <script>
+                    Swal.fire({
+                        title: 'Alerta!',
+                        text: '{{message}}',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok'
+                      })
+                </script>
+            {% endif %}
+            {% if message.level == 40 %}
+           {% comment %}  <div class="alert alert-danger alert-dismissible mt-3">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Importante: </strong>{{message}} 
+            </div> {% endcomment %}
+            <script>
+                Swal.fire({
+                    title: 'Importante!',
+                    text: '{{message}}',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                  })
+            </script>
+        {% endif %}
+        {% endfor %}
+  
+{% endif %}

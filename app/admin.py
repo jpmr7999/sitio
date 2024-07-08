@@ -26,7 +26,7 @@ class DireccionAdmin(admin.ModelAdmin):
 
 @admin.register(Orden)
 class OrdenAdmin(admin.ModelAdmin):
-    list_display = ('cliente', 'fecha_creacion', 'completada', 'direccion_envio', 'total')
+    list_display = ('cliente', 'fecha_creacion', 'completada', 'direccion_envio','estado','total')
     search_fields = ('cliente__nombre', 'cliente__apellidos')
     list_filter = ('completada', 'fecha_creacion')
 

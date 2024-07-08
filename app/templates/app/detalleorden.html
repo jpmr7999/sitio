@@ -1,0 +1,86 @@
+<!-- templates/some_page.html -->
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Bienvenido: </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#secondaryNavbar" aria-controls="secondaryNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="secondaryNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url "perfil" %}">Mi perfil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url "misordenes" %}">Mis pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "misdirecciones" %}">Mis direcciones</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class='my-4'>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card p-4 border rounded shadow">
+          <h2 class="card-title text-center mb-4">{{ orden.cliente }}</h2>
+          <div class="card-body">
+            <p class="card-text">
+              <strong>Orden:</strong> {{ orden.id }}
+            </p>
+            <p class="card-text">
+              <strong>Fecha de Creación:</strong> {{ orden.fecha_creacion }}
+            </p>
+            <p class="card-text">
+              <strong>Dirección:</strong> 
+              {% if orden.direccion_envio == None %}
+                Retiro en tienda
+              {% else %}
+                {{ orden.direccion_envio }}
+              {% endif %}
+            </p>
+            <table class="table table-sm site-block-order-table mb-4">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for o in ordenes %}
+                <tr>
+                  <td>{{ o.producto.nombre }} <strong class="mx-2">x</strong> {{ o.cantidad }}</td>
+                  <td>${{ o.precio }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                  <td class="text-black font-weight-bold">
+                    <strong>Total</strong>
+                  </td>
+                  <td class="text-black font-weight-bold">
+                    <strong>${{ orden.total }}</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="card-text">
+              <strong>Total:</strong> ${{ orden.total }}
+            </p>
+          </div>
+          <div class="d-flex justify-content-end mt-3">
+            <a href="{% url 'misordenes' %}" role="button" class="btn btn-warning btn-lg text-light">Ver mis ordenes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
